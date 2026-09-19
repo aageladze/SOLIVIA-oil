@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOLIVIA — From Grove to Table</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Cosmic Background Canvas -->
+<canvas id="cosmic-canvas"></canvas>
+    <div id="loading-screen" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#0b140e; display:flex; justify-content:center; align-items:center; z-index:99999; color:#00ff66; flex-direction:column; transition: opacity 0.8s ease;">
+    <h1 style="font-size:3rem; letter-spacing:8px;">SOLIVIA</h1>
+    <p style="letter-spacing:4px; opacity:0.8; margin-top:10px;">FROM GROVE TO TABLE</p>
+</div>
+    <!-- Product Details Modal -->
+<div id="product-modal" class="product-modal">
+    <div class="product-modal-content">
+        <span class="close-product-modal" onclick="closeProductModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image-box">
+                <span id="modal-product-icon" style="font-size: 80px;">🫒</span>
+            </div>
+            <div class="modal-info">
+                <h2 id="modal-product-name">Product Name</h2>
+                <div id="modal-product-price" class="modal-price">€0.00</div>
+                <p id="modal-product-desc">Product description goes here...</p>
+                <div class="product-specs">
+                    <p>✨ <strong>Acidity:</strong> &lt; 0.2%</p>
+                    <p>✨ <strong>Origin:</strong> Cold Pressed from Andalusia, Spain</p>
+                </div>
+                <button id="modal-add-btn" class="checkout-btn" style="margin-top: 20px;">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Floating Cart Button -->
+<div class="cart-trigger" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+<!-- Cart Sidebar Modal -->
+<div id="cart-modal" class="cart-modal">
+    <div class="cart-header">
+        <h3>Your Shopping Bag</h3>
+        <span class="close-cart" onclick="toggleCart()">&times;</span>
+    </div>
+    <div id="cart-items" class="cart-items">
+        <p class="empty-msg">Your cart is currently empty.</p>
+    </div>
+    <div class="cart-footer">
+        <div class="total-price">
+            Total: €<span id="cart-total">0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="alert('Proceeding to checkout!')">Checkout Now</button>
+    </div>
+</div>
+    <audio id="bg-music" loop>
+  <source src="audio/music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ჩართვა/გამორთვის ღილაკი -->
+<button id="sound-btn">🔊 Sound On</button>
+    <canvas id="bg"></canvas>
+<audio id="bg-music" loop src="თქვენი-აუდიო-ფაილის-მისამართი.mp3"></audio>
+<button id="sound-btn">🔊 Sound On</button>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="logo">
+            SOLIVIA
+        </div>
+
+        <nav>
+            <a href="#story">Story</a>
+            <a href="#journey">Journey</a>
+            <a href="#products">Products</a>
+            <a href="#taste">Taste</a>
+        </nav>
+
+        <button class="menu-btn">
+            ☰
+        </button>
+
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    PREMIUM SPANISH EXTRA VIRGIN OLIVE OIL
+                </p>
+
+                <h1>
+                    FROM<br>
+                    <span>GROVE</span><br>
+                    TO TABLE
+                </h1>
+
+                <p class="hero-description">
+                    Discover the character of authentic Spanish olive oil,
+                    crafted with tradition and brought to your table.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#story" class="primary-btn">
+                        Explore the Story
+                    </a>
+
+                    <a href="#products" class="secondary-btn">
+                        Discover SOLIVIA
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="olive-orbit orbit-one"></div>
+                <div class="olive-orbit orbit-two"></div>
+
+                <div class="olive">
+                    🫒
+                </div>
+
+                <div class="country">
+                    SPAIN
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STORY -->
+        <section id="story" class="story section">
+
+            <p class="section-label">
+                01 — OUR STORY
+            </p>
+
+            <h2>
+                A taste shaped<br>
+                by the <span>Spanish sun.</span>
+            </h2>
+
+            <p class="section-text">
+                SOLIVIA brings the spirit of Spanish olive groves
+                to Georgia. Every drop represents a journey from
+                carefully selected olives to a refined table experience.
+            </p>
+
+        </section>
+
+
+        <!-- JOURNEY -->
+        <section id="journey" class="journey section">
+
+            <p class="section-label">
+                02 — THE JOURNEY
+            </p>
+
+            <h2>
+                From olive<br>
+                <span>to liquid gold.</span>
+            </h2>
+
+            <div class="journey-grid">
+
+                <div class="journey-card">
+                    <span>01</span>
+                    <h3>Grove</h3>
+                    <p>
+                        Spanish olive trees growing under the Mediterranean sun.
+                    </p>
+                </div>
+
+                <div class="journey-card">
+                    <span>02</span>
+                    <h3>Harvest</h3>
+                    <p>
+                        Carefully selected olives prepared for extraction.
+                    </p>
+                </div>
+
+                <div class="journey-card">
+                    <span>03</span>
+                    <h3>Extraction</h3>
+                    <p>
+                        A process designed to preserve aroma and character.
+                    </p>
+                </div>
+
+                <div class="journey-card">
+                    <span>04</span>
+                    <h3>Table</h3>
+                    <p>
+                        A premium Spanish experience brought to your kitchen.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCTS -->
+        <section id="products" class="products section">
+
+            <p class="section-label">
+                03 — COLLECTION
+            </p>
+
+            <h2>
+                Meet the<br>
+                <span>SOLIVIA collection.</span>
+            </h2>
+
+            <div class="product-grid" id="productGrid"></div>
+
+                <article class="product-card">
+                    <div class="product-number">01</div>
+
+                    <div class="product-icon">
+                        🫒
+                    </div>
+
+                    <h3>Classic EVOO</h3>
+
+                    <p>
+                        Balanced, elegant and versatile.
+                    </p>
+
+                    <button>
+                        View Product →
+                    </button>
+                </article>
+
+
+                <article class="product-card featured">
+                    <div class="product-number">02</div>
+
+                    <div class="product-icon">
+                        ✦
+                    </div>
+
+                    <h3>Premium Selection</h3>
+
+                    <p>
+                        Rich character for special moments.
+                    </p>
+
+                    <button>
+                        View Product →
+                    </button>
+                </article>
+
+
+                <article class="product-card">
+                    <div class="product-number">03</div>
+
+                    <div class="product-icon">
+                        ◉
+                    </div>
+
+                    <h3>Chef's Choice</h3>
+
+                    <p>
+                        Created for elevated everyday cooking.
+                    </p>
+
+                    <button>
+                        View Product →
+                    </button>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- TASTE -->
+        <section id="taste" class="taste section">
+
+            <p class="section-label">
+                04 — TASTE
+            </p>
+
+            <h2>
+                Find your<br>
+                <span>taste profile.</span>
+            </h2>
+
+            <div class="taste-box">
+
+                <p>
+                    Fresh. Fruity. Balanced. Bold.
+                </p>
+
+                <button id="tasteButton">
+                    Discover Your Profile
+                </button>
+
+                <div id="tasteResult"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            SOLIVIA
+        </div>
+
+        <p>
+            FROM GROVE TO TABLE
+        </p>
+
+        <span>
+            © 2026 SOLIVIA
+        </span>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
+<section class="reviews-section">
+    <h2>What Our Customers Say</h2>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"The best olive oil I've ever tasted. The flavor profile and aroma are unmatched!"</p>
+            <h4>— Sarah M.</h4>
+        </div>
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Fast delivery and premium packaging. The Premium Selection is my personal favorite."</p>
+            <h4>— George G.</h4>
+        </div>
+    </div>
+</section>
+<section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+        <summary>How long does shipping take?</summary>
+        <p>Delivery typically takes 1–3 business days depending on your location.</p>
+    </details>
+    <details>
+        <summary>How should I store SOLIVIA olive oil?</summary>
+        <p>Keep it in a cool, dark place away from direct sunlight and heat sources to preserve flavor.</p>
+    </details>
+    <details>
+        <summary>Is SOLIVIA extra virgin olive oil cold-pressed?</summary>
+        <p>Yes, all our olive oils are 100% cold-pressed to ensure maximum quality and rich taste.</p>
+    </details>
+</section>
+<section class="newsletter-section">
+    <div class="newsletter-box">
+        <h3>Get 10% Off Your First Order</h3>
+        <p>Subscribe to our newsletter for exclusive offers, recipes, and updates.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</section>
+<div class="trust-badges">
+    <div class="badge-item">
+        <span>🌱</span>
+        <p>100% Organic</p>
+    </div>
+    <div class="badge-item">
+        <span>🫒</span>
+        <p>First Cold Press</p>
+    </div>
+    <div class="badge-item">
+        <span>🚚</span>
+        <p>Fast Shipping</p>
+    </div>
+</div>
+<section class="taste-quiz">
+    <h2>Find Your Perfect Match</h2>
+    <p>Select your preference to discover the ideal olive oil for your dish.</p>
+    <div class="quiz-buttons">
+        <button onclick="showMatch('smooth')">Light & Fruity</button>
+        <button onclick="showMatch('balanced')">Balanced & Peppery</button>
+        <button onclick="showMatch('bold')">Intense & Robust</button>
+    </div>
+    <div id="quiz-result" class="quiz-result-box">
+        <p>Click a button above to get a personal recommendation!</p>
+    </div>
+</section>
+<section class="stats-section">
+    <div class="stat-card">
+        <h3 class="stat-number">100%</h3>
+        <p>Extra Virgin Quality</p>
+    </div>
+    <div class="stat-card">
+        <h3 class="stat-number">0.2%</h3>
+        <p>Ultra-Low Acidity</p>
+    </div>
+    <div class="stat-card">
+        <h3 class="stat-number">5,000+</h3>
+        <p>Happy Customers</p>
+    </div>
+</section>
+<section class="comparison-section">
+    <h2>Why Choose SOLIVIA?</h2>
+    <div class="comparison-grid">
+        <div class="comp-box standard">
+            <h3>Standard Store Oil</h3>
+            <ul>
+                <li>❌ High Acidity & Blended</li>
+                <li>❌ Stored in Transparent Plastic</li>
+                <li>❌ Mass-Produced</li>
+            </ul>
+        </div>
+        <div class="comp-box solivia">
+            <h3>SOLIVIA Reserve</h3>
+            <ul>
+                <li>✅ Single-Origin & Cold-Pressed</li>
+                <li>✅ Dark UV-Protected Glass</li>
+                <li>✅ Award-Winning Flavor Profile</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="bottle-showcase">
+    <div class="showcase-container">
+        <div class="bottle-image-box">
+            <img src="assets/bottle.png" alt="SOLIVIA Premium Bottle" class="responsive-bottle">
+        </div>
+        <div class="bottle-details">
+            <h2>Crafted to Perfection</h2>
+            <p>Our signature dark glass bottle protects the Extra Virgin Olive Oil from UV light, preserving its antioxidants and rich taste profile.</p>
+            <ul class="bottle-features">
+                <li>✨ Dark UV-Protected Glass</li>
+                <li>✨ Anti-Drip Pourer Cap</li>
+                <li>✨ Eco-Friendly Recyclable Packaging</li>
+            </ul>
+        </div>
+    </div>
+</section> 
+<button class="cart-btn" id="cartButton">
+    CART
+    <span id="cartCount">0</span>
+</button>
